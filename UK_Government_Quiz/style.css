@@ -38,3 +38,36 @@ footer{border-top:3px solid var(--blue);padding:17px 0 20px;text-align:center;co
 button:focus-visible,a:focus-visible{outline:4px solid #ffb600;outline-offset:4px}
 @media(max-width:760px){.app-shell{padding:0 20px}.hero{grid-template-columns:1fr;gap:31px;padding:39px 0 32px}.hero-card{min-height:0;padding:24px}.facts{gap:23px}.topbar{height:76px}.edition{font-size:11px;padding:8px}.brand{font-size:14px}.brand-words small{font-size:10px}.union-jack{width:47px;height:32px}.union-jack:before{top:10px;height:10px}.union-jack:after{left:18px;width:10px}.union-jack i{top:13px;height:5px}.question-area{padding:22px 18px}.question-text{font-size:25px}.quiz-panel,.result-panel{padding-top:30px}.quiz-head h2{font-size:27px}}
 @media(max-width:430px){body{font-size:17px}.app-shell{padding:0 15px}.edition{font-size:0;letter-spacing:0}.edition span{font-size:20px}.hero{padding-top:30px}h1{font-size:68px}.intro-text{font-size:19px}.topic-chips{gap:7px}.topic-chips span{font-size:13px;padding:7px 10px}.facts{gap:17px}.facts strong{font-size:26px}.facts span{font-size:12px}.quiz-head .eyebrow{font-size:11px}.quiz-head h2{font-size:23px}.score-pill{font-size:11px;padding:8px}.question-text{font-size:23px}.answer-btn{font-size:17px;min-height:58px;padding:12px}.feedback{font-size:16px}.quiz-foot{font-size:13px}.quiz-foot .primary-btn{font-size:15px}.result-panel h2{font-size:39px}footer{font-size:11px}}
+
+/* Readability update: Atkinson Hyperlegible with larger, more spacious text. */
+body{font-family:"Atkinson Hyperlegible",Verdana,Arial,sans-serif;font-size:21px}
+.brand{font-size:19px}.brand-words small{font-size:14px}.edition{font-size:16px}
+.eyebrow{font-size:18px;line-height:1.4}.intro-text{font-size:24px;line-height:1.65}
+.topic-chips span{font-size:18px;padding:10px 15px}
+.facts strong{font-size:34px}.facts span{font-size:17px}
+.primary-btn{font-size:21px;min-height:66px;padding:17px 24px}
+.hint{font-size:17px}.hero-card li{font-size:21px;line-height:1.45;padding:16px 0}
+.card-label{font-size:16px}.king-note{font-size:17px;line-height:1.4}.king-note b{font-size:20px}
+.quiz-head .eyebrow{font-size:17px}.quiz-head h2{font-size:36px}.score-pill{font-size:17px;padding:12px 17px}.score-pill b{font-size:22px}
+.question-area{padding:36px}.question-text{font-size:36px;line-height:1.5}
+.answer-btn{font-size:24px;line-height:1.5;min-height:78px;padding:17px 20px;gap:18px}
+.answer-letter{width:42px;height:42px;flex-basis:42px;font-size:20px}
+.feedback{font-size:22px;line-height:1.6;padding:18px 20px}.feedback strong{font-size:23px}
+.quiz-foot{font-size:18px}.result-message{font-size:22px}.review-item{font-size:19px;line-height:1.55;padding:17px 19px}.review-item b{font-size:21px}
+footer{font-size:15px;line-height:1.5}
+@media(max-width:760px){
+  body{font-size:20px}.intro-text{font-size:22px}.hero-card li{font-size:20px}
+  .question-text{font-size:32px}.answer-btn{font-size:22px;min-height:74px}
+  .feedback{font-size:20px}.quiz-head h2{font-size:31px}
+}
+@media(max-width:430px){
+  .brand{font-size:15px}.brand-words small{font-size:11px}.edition{font-size:0}
+  .intro-text{font-size:21px}.topic-chips span{font-size:16px}
+  .facts span{font-size:14px}.quiz-head .eyebrow{font-size:13px}
+  .quiz-head h2{font-size:27px}.question-area{padding:22px 17px}
+  .question-text{font-size:29px;line-height:1.5}
+  .answer-btn{font-size:21px;line-height:1.5;min-height:72px;padding:14px}
+  .answer-letter{width:38px;height:38px;flex-basis:38px;font-size:18px}
+  .feedback{font-size:19px}.quiz-foot{font-size:15px}
+  .review-item{font-size:17px}.review-item b{font-size:19px}footer{font-size:13px}
+}
