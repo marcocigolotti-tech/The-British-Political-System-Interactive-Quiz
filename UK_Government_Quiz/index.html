@@ -1,10 +1,79 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#122342"><title>The British Political System | Quiz</title><link rel="stylesheet" href="style.css"></head>
-<body><main class="app-shell">
-<header class="topbar"><a class="brand" href="#" aria-label="The British Political System quiz"><span class="brand-mark">UK</span><span>GOVERNMENT <small>UNIT 6 · CHECK YOUR KNOWLEDGE</small></span></a><span class="edition">ENGLISH QUIZ</span></header>
-<section id="intro" class="hero"><div class="hero-copy"><p class="eyebrow">THE UNITED KINGDOM</p><h1>The British<br><span>political system</span></h1><p class="intro-text">How well do you know Parliament, the Government and Magna Carta? Answer 20 questions and find out.</p><div class="facts"><div><strong>20</strong><span>questions</span></div><div><strong>4</strong><span>answers each</span></div><div><strong>∞</strong><span>new shuffle</span></div></div><button id="startBtn" class="primary-btn">Start the quiz <span aria-hidden="true">→</span></button></div>
-<aside class="hero-card" aria-label="Quiz topics"><div class="crown" aria-hidden="true">♔</div><p class="card-label">YOUR TOPICS</p><ul><li><span>01</span> Constitutional monarchy</li><li><span>02</span> Parliament &amp; Government</li><li><span>03</span> How a bill becomes law</li><li><span>04</span> Magna Carta (1215)</li></ul><div class="king-note"><span class="dot"></span> The monarch today: <b>King Charles III</b></div></aside></section>
-<section id="quiz" class="quiz-panel hidden" aria-live="polite"><div class="quiz-head"><div><p class="eyebrow">QUESTION <span id="questionNum">1</span> OF 20</p><h2 id="topicLabel">Parliament</h2></div><div class="score-pill">SCORE <b id="score">0</b></div></div><div class="progress-track"><div id="progressBar" class="progress-bar"></div></div><div class="question-area"><p id="questionText" class="question-text"></p><div id="answers" class="answers"></div><div id="feedback" class="feedback hidden" role="status"></div></div><div class="quiz-foot"><span id="answeredCount">0 answered</span><button id="nextBtn" class="primary-btn" disabled>Next question <span aria-hidden="true">→</span></button></div></section>
-<section id="result" class="result-panel hidden"><div class="result-icon" id="resultIcon">★</div><p class="eyebrow">QUIZ COMPLETE</p><h2 id="resultTitle">Well done!</h2><p class="result-score"><span id="finalScore">0</span><small> / 20</small></p><p id="resultMessage" class="result-message"></p><div id="review" class="review"></div><button id="restartBtn" class="primary-btn">Try again <span aria-hidden="true">↻</span></button></section>
-<footer><span>Creato con il supporto di AI</span><span>·</span><span>Prof. Marco Cigolotti — CIGO STUDIO</span></footer></main><script src="script.js"></script></body></html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12356d">
+  <title>The Great UK Government Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="The Great UK Government Quiz">
+        <span class="union-jack" aria-hidden="true"><i></i></span>
+        <span class="brand-words">THE GREAT UK QUIZ <small>GOVERNMENT · UNIT 6</small></span>
+      </a>
+      <span class="edition"><span aria-hidden="true">🇬🇧</span> ENGLISH CHALLENGE</span>
+    </header>
+
+    <section id="intro" class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="sparkle">✦</span> WELCOME TO THE UNITED KINGDOM!</p>
+        <h1>Who runs<br><span>Britain?</span></h1>
+        <p class="intro-text">Travel from 10 Downing Street to the Houses of Parliament. Discover who makes the laws and unlock the secrets of Magna Carta!</p>
+        <div class="topic-chips"><span>🏛️ Parliament</span><span>👑 The Crown</span><span>📜 Magna Carta</span></div>
+        <div class="facts">
+          <div><strong>20</strong><span>questions</span></div>
+          <div><strong>4</strong><span>choices</span></div>
+          <div><strong>30</strong><span>in the question bank</span></div>
+        </div>
+        <button id="startBtn" class="primary-btn">LET'S PLAY! <span aria-hidden="true">➜</span></button>
+        <p class="hint">Choose the best answer. You can do it!</p>
+      </div>
+      <aside class="hero-card" aria-label="Your UK mission">
+        <div class="card-top"><span class="card-stamp">YOUR<br>MISSION</span><span class="big-ben" aria-hidden="true">🕰️</span></div>
+        <p class="card-label">FOUR STOPS ON YOUR UK TOUR</p>
+        <ul>
+          <li><span>01</span> The King and the Government</li>
+          <li><span>02</span> The House of Commons</li>
+          <li><span>03</span> Bills become laws</li>
+          <li><span>04</span> Magna Carta, 1215</li>
+        </ul>
+        <div class="king-note"><span class="dot"></span><span>Today’s monarch<br><b>King Charles III</b></span></div>
+        <div class="card-decoration" aria-hidden="true">LONDON · UK</div>
+      </aside>
+    </section>
+
+    <section id="quiz" class="quiz-panel hidden" aria-live="polite">
+      <div class="quiz-head">
+        <div><p class="eyebrow">YOUR UK TOUR <span class="star">✦</span> QUESTION <span id="questionNum">01</span> OF 20</p><h2 id="topicLabel">Parliament</h2></div>
+        <div class="score-pill">⭐ SCORE <b id="score">0</b></div>
+      </div>
+      <div class="progress-track" aria-label="Quiz progress"><div id="progressBar" class="progress-bar"></div></div>
+      <div class="question-area">
+        <p id="questionText" class="question-text"></p>
+        <div id="answers" class="answers"></div>
+        <div id="feedback" class="feedback hidden" role="status"></div>
+      </div>
+      <div class="quiz-foot">
+        <span id="answeredCount">0 answered</span>
+        <button id="nextBtn" class="primary-btn" disabled>NEXT <span aria-hidden="true">➜</span></button>
+      </div>
+    </section>
+
+    <section id="result" class="result-panel hidden">
+      <div class="result-icon" id="resultIcon">★</div>
+      <p class="eyebrow">YOU DID IT! · QUIZ COMPLETE</p>
+      <h2 id="resultTitle">Well done!</h2>
+      <p class="result-score"><span id="finalScore">0</span><small> / 20</small></p>
+      <p id="resultMessage" class="result-message"></p>
+      <div id="review" class="review"></div>
+      <button id="restartBtn" class="primary-btn">PLAY AGAIN <span aria-hidden="true">↻</span></button>
+    </section>
+
+    <footer><span>Creato con il supporto di AI</span><span>·</span><span>Prof. Marco Cigolotti — CIGO STUDIO</span><span class="footer-tag">KEEP CALM &amp; LEARN ENGLISH!</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,28 +1,30 @@
-# The British Political System — Interactive Quiz
+# The Great UK Government Quiz
 
-A self-contained, responsive English quiz for GitHub Pages, based on Unit 6: Government.
+A bright, accessible, English-language quiz for GitHub Pages based on Unit 6: Government.
 
-## Contents
+## What’s inside
 
-- 30-question bank; each attempt randomly selects 20 questions and shuffles their order and answer choices.
-- Immediate feedback with a short explanation for each answer.
+- 30-question bank; each attempt randomly selects 20 questions.
+- Question order and answer choices are shuffled on every attempt.
+- Immediate feedback with short explanations.
 - Final score and review of incorrect answers.
-- Responsive layout for desktop, tablet and mobile.
-- No build step and no external JavaScript libraries.
+- Large, high-contrast text, clear spacing, keyboard focus indicators and large answer buttons.
+- Responsive layout for phones, tablets and computers.
+- No build step and no JavaScript libraries.
 
 ## Publish with GitHub Pages
 
-1. Create a GitHub repository and upload the files in this folder.
+1. Upload the files in this folder to a GitHub repository.
 2. Open **Settings → Pages**.
 3. Under **Build and deployment**, select **Deploy from a branch**.
-4. Select the **main** branch and **root** folder, then save.
-5. Open the published Pages URL after deployment completes.
+4. Select the **main** branch and the root folder, then save.
+5. Open the published Pages address after deployment completes.
 
 ## Teacher notes
 
-The quiz is in English and covers the constitutional monarchy, the monarch and Prime Minister, the House of Commons and House of Lords, the Cabinet, bills and Acts, and Magna Carta. It uses the current monarch, King Charles III. For accuracy, it describes the monarch as politically impartial and states that elected Parliament makes and passes legislation; Royal Assent is the final constitutional stage that turns a bill into an Act.
+The quiz covers the constitutional monarchy, King Charles III, the Prime Minister, the House of Commons and House of Lords, the Cabinet, bills and Acts, and Magna Carta. It uses short questions and clear English. The monarch is described as politically impartial; elected Parliament makes and passes legislation, and Royal Assent is the final constitutional stage that turns a bill into an Act.
 
-The figure of 650 MPs and the 63 clauses/rules are presented as in the textbook pages used to prepare the quiz.
+The figures of 650 MPs and 63 clauses/rules are presented as in the supplied textbook pages.
 
 **Creato con il supporto di AI**  
 Prof. Marco Cigolotti — CIGO STUDIO
