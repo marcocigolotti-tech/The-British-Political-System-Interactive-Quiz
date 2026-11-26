@@ -30,11 +30,94 @@ const bank = [
 {topic:"The Monarch",q:"Which statement about King Charles III is correct?",a:["He is Head of Government and makes all laws","He is Head of State and remains politically impartial","He is elected by MPs every year","He is a member of the Cabinet"],c:1,e:"The monarch is Head of State and politically impartial; the elected Parliament makes and passes legislation."},
 {topic:"Magna Carta",q:"Magna Carta was agreed during the reign of which king?",a:["King John","King Henry VIII","King Charles I","King George III"],c:0,e:"Magna Carta was agreed in 1215 under King John."}
 ];
-const total=20;let questions=[],index=0,score=0,misses=[];
+
+const total=20;
+let questions=[],index=0,score=0,misses=[],activeAudioButton=null;
 const intro=document.getElementById("intro"),quiz=document.getElementById("quiz"),result=document.getElementById("result"),nextBtn=document.getElementById("nextBtn");
+const photo={
+  king:{src:"images/king_charles_iii.jpg",alt:"King Charles III",caption:"King Charles III",credit:"Photo: White House · Public domain (U.S. federal work)",url:"https://commons.wikimedia.org/wiki/File:King_Charles_III_(July_2023).jpg"},
+  palace:{src:"images/palace_westminster.jpg",alt:"The Palace of Westminster beside the River Thames",caption:"The Palace of Westminster, home of the UK Parliament",credit:"Photo: LittleRoamingChief · Wikimedia Commons · CC BY 2.0",url:"https://commons.wikimedia.org/wiki/File:2024--15_September--Exterior_Palace_of_Westminster.jpg"},
+  commons:{src:"images/commons_chamber.jpg",alt:"The green benches inside the House of Commons chamber",caption:"The House of Commons",credit:"Image: UK Parliament · Wikimedia Commons · CC BY 3.0",url:"https://commons.wikimedia.org/wiki/File:House_of_Commons_Chamber.png"},
+  lords:{src:"images/lords_chamber.jpg",alt:"The red benches inside the House of Lords chamber",caption:"The House of Lords",credit:"Image: UK Parliament · Wikimedia Commons · CC BY 3.0",url:"https://commons.wikimedia.org/wiki/File:House_of_Lords_Chamber.png"},
+  downing:{src:"images/downing_street.jpg",alt:"10 Downing Street, the Prime Minister’s London residence",caption:"10 Downing Street",credit:"Photo: robertsharp · Wikimedia Commons · CC BY 2.0",url:"https://commons.wikimedia.org/wiki/File:10_Downing_Street_2010.jpg"},
+  magna:{src:"images/magna_carta_document.jpg",alt:"The parchment manuscript of Magna Carta, 1215",caption:"Magna Carta, 1215 · British Library Cotton MS Augustus II.106",credit:"Manuscript image: British Library via Wikimedia Commons · Public domain",url:"https://commons.wikimedia.org/wiki/File:Magna_Carta_(British_Library_Cotton_MS_Augustus_II.106).jpg"},
+  kingJohn:{src:"images/king_john_magna_carta.jpg",alt:"Historical painting showing King John assenting to Magna Carta",caption:"King John assenting to Magna Carta, 1215 · painting by Charles Sims",credit:"Parliamentary Art Collection via Wikimedia Commons · Public domain",url:"https://commons.wikimedia.org/wiki/File:Charles_Sims_(1873-1928)_-_King_John_Assents_to_the_Magna_Carta,_1215_-_WOA_2602_-_Parliamentary_Art_Collection.jpg"}
+};
 function shuffled(arr){return [...arr].sort(()=>Math.random()-.5)}
-function begin(){questions=shuffled(bank).slice(0,total);index=0;score=0;misses=[];intro.classList.add("hidden");result.classList.add("hidden");quiz.classList.remove("hidden");render()}
-function render(){const item=questions[index];document.getElementById("questionNum").textContent=String(index+1).padStart(2,"0");document.getElementById("topicLabel").textContent=item.topic;document.getElementById("questionText").textContent=item.q;document.getElementById("score").textContent=score;document.getElementById("answeredCount").textContent=index+" answered";document.getElementById("progressBar").style.width=(index/total*100)+"%";const box=document.getElementById("answers");box.innerHTML="";document.getElementById("feedback").classList.add("hidden");nextBtn.disabled=true;shuffled(item.a.map((text,originalIndex)=>({text,originalIndex}))).forEach((answer,i)=>{const button=document.createElement("button");button.className="answer-btn";button.innerHTML='<span class="answer-letter">'+String.fromCharCode(65+i)+'</span><span></span>';button.querySelector("span:last-child").textContent=answer.text;button.addEventListener("click",()=>choose(button,answer.originalIndex,item));box.appendChild(button)});nextBtn.textContent=index===total-1?"See your result →":"Next question →"}
-function choose(button,chosen,item){const buttons=[...document.querySelectorAll(".answer-btn")];buttons.forEach(b=>b.disabled=true);const correct=chosen===item.c;if(correct){score++;button.classList.add("correct")}else{button.classList.add("incorrect");const cb=buttons.find(b=>b.querySelector("span:last-child").textContent===item.a[item.c]);if(cb)cb.classList.add("correct");misses.push({q:item.q,correct:item.a[item.c]})}document.getElementById("score").textContent=score;document.getElementById("answeredCount").textContent=(index+1)+" answered";const feedback=document.getElementById("feedback");feedback.innerHTML="<strong>"+(correct?"Correct!":"Not quite.")+"</strong> "+item.e;feedback.classList.remove("hidden");nextBtn.disabled=false}
-function finish(){quiz.classList.add("hidden");result.classList.remove("hidden");document.getElementById("finalScore").textContent=score;const p=score/total,title=p>=.85?"Excellent work!":p>=.65?"Good job!":p>=.45?"Keep practising!":"Let’s review the unit!";document.getElementById("resultTitle").textContent=title;document.getElementById("resultMessage").textContent=p>=.85?"You have a strong understanding of the British political system.":p>=.65?"You know the main ideas. Review the questions you missed to improve further.":"Read the unit again and try the quiz once more. You can do it!";document.getElementById("resultIcon").textContent=p>=.65?"★":"↻";const review=document.getElementById("review");review.innerHTML="";misses.forEach(m=>{const d=document.createElement("div");d.className="review-item";const b=document.createElement("b"),s=document.createElement("span");b.textContent=m.q;s.textContent="Correct answer: "+m.correct;d.append(b,s);review.appendChild(d)})}
-document.getElementById("startBtn").addEventListener("click",begin);nextBtn.addEventListener("click",()=>{if(index<total-1){index++;render()}else finish()});document.getElementById("restartBtn").addEventListener("click",()=>{result.classList.add("hidden");intro.classList.remove("hidden")});
+function resetAudioButton(button){if(!button)return;button.classList.remove("is-speaking");button.setAttribute("aria-pressed","false");const icon=button.querySelector(".speaker-icon");if(icon)icon.textContent="🔊";const label=button.querySelector(".listen-label");if(label)label.textContent="LISTEN";if(button.id==="questionAudio")button.setAttribute("aria-label","Listen to the question");else button.setAttribute("aria-label","Listen to this answer")}
+function stopAudio(){if("speechSynthesis" in window)window.speechSynthesis.cancel();resetAudioButton(activeAudioButton);activeAudioButton=null}
+function speakText(text,button){
+  if(!("speechSynthesis" in window)||!("SpeechSynthesisUtterance" in window)){document.getElementById("feedback").textContent="Audio reading is not available in this browser.";document.getElementById("feedback").classList.remove("hidden");return}
+  if(activeAudioButton===button&&window.speechSynthesis.speaking){stopAudio();return}
+  stopAudio();
+  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="en-GB";utterance.rate=.82;utterance.pitch=1;
+  const voices=window.speechSynthesis.getVoices();
+  const british=voices.find(v=>v.lang.toLowerCase()==="en-gb")||voices.find(v=>v.lang.toLowerCase().startsWith("en-gb"));
+  if(british)utterance.voice=british;
+  activeAudioButton=button;button.classList.add("is-speaking");button.setAttribute("aria-pressed","true");
+  const icon=button.querySelector(".speaker-icon");if(icon)icon.textContent="⏹";const label=button.querySelector(".listen-label");if(label)label.textContent="STOP";
+  button.setAttribute("aria-label","Stop audio");
+  const done=()=>{if(activeAudioButton===button){resetAudioButton(button);activeAudioButton=null}};
+  utterance.onend=done;utterance.onerror=done;window.speechSynthesis.speak(utterance)
+}
+function visualFor(item){
+  const t=item.topic,q=item.q.toLowerCase();
+  if(t==="The Monarch")return photo.king;
+  if(t==="House of Lords")return photo.lords;
+  if(t==="House of Commons")return photo.commons;
+  if(t==="Parliament")return photo.palace;
+  if(t==="The Government")return photo.downing;
+  if(t==="Bills and laws")return photo.commons;
+  if(t==="Magna Carta")return q.includes("which king")||q.includes("during the reign")?photo.kingJohn:photo.magna;
+  return photo.palace
+}
+function setVisual(item){
+  const m=visualFor(item),figure=document.getElementById("questionVisual"),img=document.getElementById("questionImage"),caption=document.getElementById("imageCaption"),credit=document.getElementById("imageCredit");
+  img.src=m.src;img.alt=m.alt;caption.textContent=m.caption;credit.textContent=m.credit+" · ";
+  const link=document.createElement("a");link.href=m.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent="image source";credit.appendChild(link);
+  figure.classList.remove("hidden")
+}
+function begin(){stopAudio();questions=shuffled(bank).slice(0,total);index=0;score=0;misses=[];intro.classList.add("hidden");result.classList.add("hidden");quiz.classList.remove("hidden");render()}
+function render(){
+  stopAudio();const item=questions[index];
+  document.getElementById("questionNum").textContent=String(index+1).padStart(2,"0");
+  document.getElementById("topicLabel").textContent=item.topic;
+  document.getElementById("questionText").textContent=item.q;
+  document.getElementById("score").textContent=score;
+  document.getElementById("answeredCount").textContent=index+" answered";
+  document.getElementById("progressBar").style.width=(index/total*100)+"%";
+  setVisual(item);
+  const qAudio=document.getElementById("questionAudio");resetAudioButton(qAudio);qAudio.onclick=()=>speakText(item.q,qAudio);
+  const box=document.getElementById("answers");box.innerHTML="";
+  document.getElementById("feedback").classList.add("hidden");nextBtn.disabled=true;
+  shuffled(item.a.map((text,originalIndex)=>({text,originalIndex}))).forEach((answer,i)=>{
+    const row=document.createElement("div");row.className="answer-row";
+    const button=document.createElement("button");button.type="button";button.className="answer-btn";
+    button.innerHTML='<span class="answer-letter">'+String.fromCharCode(65+i)+'</span><span class="answer-copy"></span>';
+    button.querySelector(".answer-copy").textContent=answer.text;
+    button.addEventListener("click",()=>choose(button,answer.originalIndex,item));
+    const audio=document.createElement("button");audio.type="button";audio.className="listen-btn answer-listen";audio.setAttribute("aria-label","Listen to this answer");audio.setAttribute("aria-pressed","false");audio.innerHTML='<span class="speaker-icon" aria-hidden="true">🔊</span><span class="listen-label">LISTEN</span>';
+    audio.addEventListener("click",event=>{event.stopPropagation();speakText(answer.text,audio)});
+    row.append(button,audio);box.appendChild(row)
+  });
+  nextBtn.textContent=index===total-1?"SEE YOUR RESULT →":"NEXT →"
+}
+function choose(button,chosen,item){
+  const buttons=[...document.querySelectorAll(".answer-btn")];buttons.forEach(b=>b.disabled=true);
+  const correct=chosen===item.c;
+  if(correct){score++;button.classList.add("correct")}
+  else{button.classList.add("incorrect");const cb=buttons.find(b=>b.querySelector(".answer-copy").textContent===item.a[item.c]);if(cb)cb.classList.add("correct");misses.push({q:item.q,correct:item.a[item.c]})}
+  document.getElementById("score").textContent=score;document.getElementById("answeredCount").textContent=(index+1)+" answered";
+  const feedback=document.getElementById("feedback");feedback.innerHTML="<strong>"+(correct?"Correct!":"Not quite.")+"</strong> "+item.e;feedback.classList.remove("hidden");nextBtn.disabled=false
+}
+function finish(){
+  stopAudio();quiz.classList.add("hidden");result.classList.remove("hidden");document.getElementById("finalScore").textContent=score;
+  const p=score/total,title=p>=.85?"Excellent work!":p>=.65?"Good job!":p>=.45?"Keep practising!":"Let’s review the unit!";
+  document.getElementById("resultTitle").textContent=title;
+  document.getElementById("resultMessage").textContent=p>=.85?"You have a strong understanding of the British political system.":p>=.65?"You know the main ideas. Review the questions you missed to improve further.":"Read the unit again and try the quiz once more. You can do it!";
+  document.getElementById("resultIcon").textContent=p>=.65?"★":"↻";const review=document.getElementById("review");review.innerHTML="";
+  misses.forEach(m=>{const d=document.createElement("div");d.className="review-item";const b=document.createElement("b"),span=document.createElement("span");b.textContent=m.q;span.textContent="Correct answer: "+m.correct;d.append(b,span);review.appendChild(d)})
+}
+document.getElementById("startBtn").addEventListener("click",begin);
+nextBtn.addEventListener("click",()=>{if(index<total-1){index++;render()}else finish()});
+document.getElementById("restartBtn").addEventListener("click",()=>{result.classList.add("hidden");intro.classList.remove("hidden");stopAudio()});

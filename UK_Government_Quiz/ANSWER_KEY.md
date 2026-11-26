@@ -2,6 +2,10 @@
 
 The quiz randomly selects 20 questions from a bank of 30. Correct answers and explanations are built into script.js; this is a content summary for the teacher.
 
+## Images and audio
+
+The quiz uses the supplied photos and images beside related questions. Captions include the image credits and clickable source pages. Speaker buttons read the question and each answer aloud using browser text-to-speech; the quiz requests an English (United Kingdom) voice where available.
+
 ## Key facts
 
 - The UK is a parliamentary democracy under a constitutional monarchy.

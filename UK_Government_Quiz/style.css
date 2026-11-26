@@ -71,3 +71,30 @@ footer{font-size:15px;line-height:1.5}
   .feedback{font-size:19px}.quiz-foot{font-size:15px}
   .review-item{font-size:17px}.review-item b{font-size:19px}footer{font-size:13px}
 }
+
+/* Question photos and listen buttons */
+.question-line{display:flex;align-items:flex-start;gap:18px}
+.question-line .question-text{flex:1}
+.listen-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:64px;min-height:58px;border:2px solid var(--blue);border-radius:12px;background:#eaf3ff;color:var(--blue);font:900 17px/1 Arial,sans-serif;cursor:pointer}
+.listen-btn:hover{background:var(--yellow)}
+.listen-btn.is-speaking{background:var(--yellow);border-color:var(--red);color:#82202a}
+.listen-label{font-size:13px;letter-spacing:.06em}
+.audio-hint{margin:0 0 15px;color:#425975;font-size:17px;font-weight:700}
+.question-visual{margin:0 0 20px;padding:10px;background:#f2f6fc;border:2px solid #d4dfef;border-radius:14px}
+.question-visual img{display:block;max-width:100%;max-height:290px;width:100%;object-fit:contain;border-radius:8px;background:#fff}
+.question-visual figcaption{padding:9px 5px 3px;color:var(--blue);font-size:16px;line-height:1.4;font-weight:800}
+.question-visual figcaption small{display:block;margin-top:5px;font-size:16px;line-height:1.5;font-weight:600;color:#334b68}
+.question-visual figcaption a{color:#173f80}
+.answer-row{display:flex;align-items:stretch;gap:10px}
+.answer-row .answer-btn{flex:1;width:auto}
+.answer-row .listen-btn{width:68px;min-width:68px;min-height:100%;flex-direction:column;gap:4px}
+@media(max-width:430px){
+ .question-line{gap:10px}.question-line .question-text{font-size:27px}
+ .question-listen{min-width:52px;min-height:54px;padding:5px}
+ .question-listen .listen-label{font-size:10px}
+ .answer-row{gap:7px}.answer-row .listen-btn{width:56px;min-width:56px}
+ .answer-row .listen-label{font-size:10px}
+ .question-visual img{max-height:230px}.question-visual figcaption{font-size:15px}.question-visual figcaption small{font-size:14px}
+ .audio-hint{font-size:15px}
+}
+.answer-btn .answer-copy{display:block;flex:1}

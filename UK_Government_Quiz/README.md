@@ -8,9 +8,11 @@ A bright, accessible, English-language quiz for GitHub Pages based on Unit 6: Go
 - Question order and answer choices are shuffled on every attempt.
 - Immediate feedback with short explanations.
 - Final score and review of incorrect answers.
+- Browser audio reading for every question and every answer, with a British English voice requested when available; each speaker button can be used to stop playback.
+- Seven supplied photographs and document images appear beside relevant questions, with visible captions, credits and source links.
 - Large, high-contrast text, clear spacing, keyboard focus indicators and large answer buttons.
 - Responsive layout for phones, tablets and computers.
-- No build step and no JavaScript libraries.
+- No build step, no audio downloads and no JavaScript libraries. Audio uses the browser speech synthesis feature, so an English voice must be available in the browser or device.
 
 ## Publish with GitHub Pages
 
